@@ -1,0 +1,60 @@
+{% extends 'inventory/base.html' %}
+{% block title %}{{ title }} {% endblock %}
+
+{% block content %}
+<style>
+.container {
+    margin-top: 50px; /* Add margin to the top */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Blue color for primary button */
+    border-color: #007bff; /* Matching border color */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Darker blue color on hover */
+    border-color: #0056b3; /* Matching border color on hover */
+}
+
+.table {
+    background-color: #ffffff; /* White background color for table */
+}
+
+.table thead {
+    background-color: #007bff; /* Blue background color for table header */
+    color: #ffffff; /* White text color for table header */
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #f2f2f2; /* Light gray background color for even rows */
+}
+
+.table tbody tr:hover {
+    background-color: #cce5ff; /* Light blue background color on hover */
+}
+</style>
+
+<div class="container">
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.first_name}}</td>
+                <td>{{ user.last_name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.userprofile.physical_address }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

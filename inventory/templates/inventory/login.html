@@ -1,0 +1,58 @@
+{% extends 'inventory/base.html' %}
+{% block title %}{{ register }} {% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+    body {
+        background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        font-family: Arial, sans-serif; /* Example font family */
+    }
+
+    .card {
+        background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for the card */
+        border-radius: 10px; /* Rounded corners for the card */
+    }
+
+    .card-header {
+        background-color: #007bff; /* Blue background color for card header */
+        color: #fff; /* White text color for card header */
+        border-bottom: none; /* Remove bottom border from card header */
+        border-top-left-radius: 10px; /* Rounded corners for the top-left of the card */
+        border-top-right-radius: 10px; /* Rounded corners for the top-right of the card */
+    }
+
+    .btn-info {
+        background-color: #007bff; /* Blue background color for info buttons */
+        border-color: #007bff; /* Matching border color for info buttons */
+    }
+
+    .btn-info:hover {
+        background-color: #0056b3; /* Darker blue color on hover */
+        border-color: #0056b3; /* Matching border color on hover */
+    }
+</style>
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="text-center">Login</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form | crispy }}
+                        <br>
+                        <input class="btn btn-info btn-lg btn-block" type="submit" value="Login">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

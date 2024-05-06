@@ -1,0 +1,101 @@
+{% extends 'inventory/base.html' %}
+{% block title %}{{ title }} {% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+body {
+    background-image: url('https://media.istockphoto.com/id/1035982516/photo/file-sharing-concept-data-transferring.jpg?s=2048x2048&w=is&k=20&c=IH5sv-GcRuwUTesnl_ld9zosrS-3ugUTpNt76b54Faw');
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn-info:hover {
+    background-color: #117a8b;
+    border-color: #117a8b;
+}
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header bg-primary text-white">
+          <h4 class="card-title">Orders</h4>
+        </div>
+        <div class="card-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Ordered Product</th>
+                <th scope="col">Created by</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Order Date</th>
+              </tr>
+            </thead>
+            {% if user.is_staff and user.is_superuser %}
+            <tbody>
+              {% for order in orders %}
+              <tr>
+                <td>{{ order.product }}</td>
+                <td>{{ order.created_by.username }}</td>
+                <td>{{ order.order_quantity }}</td>
+                <td>{{ order.date }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            {% else %}
+            <tbody>
+              {% for order in orders %}
+              {% if user.username == order.created_by.username %}
+              <tr>
+                <td>{{ order.product }}</td>
+                <td>{{ order.created_by.username }}</td>
+                <td>{{ order.order_quantity }}</td>
+                <td>{{ order.date }}</td>
+              </tr>
+              {% endif %}
+              {% endfor %}
+            </tbody>
+            {% endif %}
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header bg-info text-white">
+          <h4 class="card-title">Create a New Order</h4>
+        </div>
+        <div class="card-body">
+          <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy}}
+            <br>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Create Order</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

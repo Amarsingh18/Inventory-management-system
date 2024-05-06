@@ -1,0 +1,50 @@
+{% extends 'inventory/base.html' %}
+{% block title %}{{ register }} {% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+.container {
+    margin-top: 50px; /* Add margin to the top */
+}
+
+.btn-info {
+    background-color: #17a2b8; /* Aqua color for button */
+    border-color: #17a2b8; /* Matching border color */
+}
+
+.btn-info:hover {
+    background-color: #117a8b; /* Darker aqua color on hover */
+    border-color: #117a8b; /* Matching border color on hover */
+}
+
+.form-control {
+    border-color: #17a2b8; /* Border color for input fields */
+    border-radius: 20px; /* Rounded corners for input fields */
+}
+
+.form-control:focus {
+    border-color: #117a8b; /* Border color when input field is focused */
+    box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.25); /* Shadow effect when input field is focused */
+}
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h3 class="text-center">Create Account</h3>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form | crispy }}
+                        <br>
+                        <input class="btn btn-info btn-lg btn-block" type="submit" value="Signup">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

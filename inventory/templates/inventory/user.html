@@ -1,0 +1,104 @@
+{% extends 'inventory/base.html' %}
+{% block title %}{{ profile }} {% endblock %}
+
+{% block content %}
+<style>
+.container {
+    margin-top: 50px; /* Add margin to the top */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Blue color for primary button */
+    border-color: #007bff; /* Matching border color */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Darker blue color on hover */
+    border-color: #0056b3; /* Matching border color on hover */
+}
+
+.table {
+    background-color: #ffffff; /* White background color for table */
+}
+
+.card-header {
+    background-color: #007bff; /* Blue background color for card header */
+    color: #ffffff; /* White text color for card header */
+}
+
+.card {
+    border-radius: 20px; /* Rounded corners for card */
+}
+
+.img-thumbnail {
+    border-radius: 50%; /* Rounded corners for image */
+}
+
+.form-control {
+    border-color: #007bff; /* Border color for input fields */
+    border-radius: 20px; /* Rounded corners for input fields */
+}
+
+.form-control:focus {
+    border-color: #0056b3; /* Border color when input field is focused */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Shadow effect when input field is focused */
+}
+</style>
+
+<div class="container my-4">
+    <div class="row align-items-start">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="text-center">User's Profile</h1>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card text-center p-3">
+                                <h4>Profile Information</h4>
+                                <br>
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="col">User Name</th>
+                                            <td scope="col">{{ user.username }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">First Name</th>
+                                            <td scope="col">{{ user.first_name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">Last Name</th>
+                                            <td scope="col">{{ user.last_name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Email</th>
+                                            <td>{{ user.email }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Phone</th>
+                                            <td>{{ user.userprofile.mobile }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Address</th>
+                                            <td>{{ user.userprofile.physical_address }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            {% if user.userprofile.picture %}
+                            <img class="img-thumbnail" src="{{ user.userprofile.picture.url }}" alt="profile picture">
+                            {% else %}
+                            <img class="img-thumbnail" src="https://via.placeholder.com/150" alt="profile picture">
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
